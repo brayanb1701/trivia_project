@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Trivial</title>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<body>
+	<div id="pregunta"></div>
+	<div id="respuestas"></div>
+	<input type="button" value="a ver si acerté" onclick="comprobar()">
+
+	<script>
+   var preguntas = [
+   "¿Cuál es la capital de Colombia?",
+   "Colombia posee costa sobre dos océanos ¿Cuáles son?",
+   "¿Cuántas regiones conforman la geografía colombiana?",
+   '¿A qué ciudad se le conoce como La ciudad de la eterna primavera ?',
+   "La moneda colombiana es:",
+   "Las banderas de Ecuador, Venezuela y Colombia tienen los mismos colores (amarillo,, rojo y azul?¿Cuál es la diferencia?",
+   "Al territorio colombiano lo atraviesa la cordillera de:",
+   "El río Amazonas y el Orinoco son las fronteras naturales de Colombia con:",
+   "La ausencia de estaciones en Colombia se debe a:",
+   "En Colombia el clima y la temperatura dependen de:",
+   "Colombia es uno de los países del planeta más rico en:",
+   "La flor emblemática de Colombia es:",
+   "Una de las tribus o pueblos indígenas que habita al noroeste del país se llama:",
+   "Colombia es el tercer productor mundial de café. El cafée que se produce en este país es  el de tipo arábica, que se caracteriza por ser el más:",
+   "Colombia es el segundo exportador de florez después de:",
+   "Si una persona te dice Erda, mi llave, ¿Todo bien o qué?, él/ella viene de:",
+   "Cali, la 3° ciudad más grande de Colombia, es considerada la capital mundial de...",
+   "¿Cuáles son los ritmos musicales colombianos más conocidos?",
+   'El premio Nobel colombiano, conocido por la novela Cien años de soledad se llama:',
+   "El patólogo Manuel Elkin Patarroyo es famoso por los estudios de la vacuna sintética contra el:",
+   "El pintor y escutor colombiano Fernando Botero es famoso por sus figuras:",
+   "¿Cuál de estas series, conocidas en todo el mundo, es colombiana?",
+   "El deporte nacional colombiano por escelencia es:"
+   ];
+
+   var respuestas = [
+   ["Bogotá", "Caracas", "Quito", "Medellín"],
+   ["El Pacífico y el Atlántico", "El Atlántico y el Índico", "El Caribe y el Antártico", "El Pacífico y el Caribe" ],
+   ["5","4","3","6"],
+   ["Medellín","Barranquilla","Bogotá","Cartagena"],
+   ["El peso","El sucre","El balboa","El sol"],
+   ["La bandera de Colombia no lleva objetos en el centro","La bandera de Colombia lleva una orquídea","La bandera de Colombia tiene estrellas","La bandera de Colombia lleva un escudo"],
+   ["Los Andes","Los Alpes","Los Apalaches","El Himalaya"],
+   ["Perú y Venezuela","Brasil y Guyana", "Perú y Brasil", "Venezuela y Argentina"],
+   ["Que está en el trópico","Que tiene montañas","El fenómeno de El Niño","Los vientos alisios"],
+   ["La cercanía a la línea del Ecuador","La cercanía al mar","La altitud","La cercanía a las montañas"],
+   ["Biodiversidad","Razas de ganado","Desiertos","Bosque primario"],
+   ["La orquídea","La heliconia","El Ave del Paraíso","La rosa"],
+   ["Wayú","Ticuna","Emberá","Zenú"],
+   ["Suave","Rico","Fuerte","Acidulado"],
+   ["Holanda","EE.UU","Kenia","Japón"],
+   ["La costa Caribe","El Amazonas","De la región de la Orinoquía","La costa Pacífica"],
+   ["La salsa","La corrida","La cumbia","La caña de azucar"],
+   ["El vallenato y la cumbia","La salsa y el chachachá","El tango y la milonga","La bachata y el merengue"],
+   ["Gabriel García Márquez","Octavio Paz","Mario Vargas Llosa","Francisco José Cela"],
+   ["Paludismo o malaria","Chikungunya","Dengue","Ébola"],
+   ["Gordas","Abstractas","Esqueléticas","Hiperrealistas"],
+   ["Betty, la fea","Violetta","Los soprano","El clon"],
+   ["El fútbol","El béisbol","El voley","El ciclismo" ]
+   ];
+
+jugar();
+var indice_respuesta_correcta;
+
+function jugar(){
+
+
+  var indice_aleatorio = Math.floor(Math.random()*preguntas.length);
+
+
+   var respuestas_posibles = respuestas[indice_aleatorio];
+
+   var posiciones = [0,1,2,3];
+   var respuestas_reordenadas = [];
+   
+   var ya_se_metio = false;
+  
+   for(i in respuestas_posibles){
+   	var posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+   	if(posicion_aleatoria==0 && ya_se_metio == false){
+   		indice_respuesta_correcta =i;
+   		ya_se_metio = true;
+
+
+
+   	}
+   	respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+   	posiciones.splice(posicion_aleatoria, 1);
+   }
+
+
+
+   var txt_respuestas="";
+   for(i in respuestas_reordenadas){
+      txt_respuestas += '<input type="radio" name="pp" value="'+i+'"><label>'+respuestas_reordenadas[i]+'</label><br>';
+   }
+
+   document.getElementById("respuestas").innerHTML = txt_respuestas;
+
+   document.getElementById("pregunta").innerHTML = preguntas[indice_aleatorio];
+
+}
+
+
+
+
+function comprobar (){
+	var respuesta = $("input[type=radio]:checked").val();
+	if(respuesta==indice_respuesta_correcta){
+		alert("Acertaste");
+	} else{
+		alert("Fallaste");
+	}
+
+	jugar();
+	
+}
+</script>
+</body>
+</html>
